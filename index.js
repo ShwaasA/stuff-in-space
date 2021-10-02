@@ -11,7 +11,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     var spaceObject = L.icon({
-        iconUrl: 'images/hexagon-fill.svg'
+        iconUrl: 'images/circle-fill.svg',
+        iconSize: [7, 7]
+    });
+
+
+    var pin = L.icon({
+        iconUrl: 'images/geo-alt-fill.svg',
+        iconSize: [20, 20]
+    });
+
+    map.on('click', function(e) {
+        var latlang = e.latlng
+        var pinLat = latlang.lat        
+        var pinLong = latlang.lng
+        L.marker([pinLat, pinLong], {icon: pin}).bindPopup("Pin Location").addTo(map);
+    });
+
+    map.on('click', function(e) {
+        var latlang = e.latlng
+        var pinradius = latlang.lng + 5
+        L.marker([latlang.lat, latlang.lng], {icon: pin}).bindPopup("Pin Location").addTo(map);
     });
 
     // Submitting the form to get all the space objects on the map
